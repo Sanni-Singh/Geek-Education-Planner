@@ -1,12 +1,22 @@
 import './App.css'
 // import Card from './components/Card'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 function App() {
   const [inputVal,setInputVal] = useState("");
   const [inputNum,setInputNum] = useState("");
   const [itemList,setitemList] = useState([]);
-  console.log(inputNum);
+
+  useEffect(()=>{
+    const abcd = JSON.parse(localStorage.getItem("ram"))
+    if(abcd)setitemList(abcd)
+      
+  },[])
+
+  useEffect(()=>{
+    localStorage.setItem("ram",JSON.stringify(itemList))
+  },[itemList])
+
 
     const plusFn = (idx)=>{
       const oldMaterial = [...itemList];
